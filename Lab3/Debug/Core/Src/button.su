@@ -1,0 +1,2 @@
+button.c:21:6:FlagKeyProcess	16	static
+button.c:24:6:getKeyInput	16	static
