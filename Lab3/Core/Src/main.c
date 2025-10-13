@@ -20,8 +20,6 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "fsm.h"
-#include "software_timer.h"
-
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -199,20 +197,20 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, LED_RED_STRAIGHT_Pin|LED_GREEN_STRAIGHT_Pin|LED_YELLOW_STRAIGHT_Pin|LED_RED_HORIZONTAL_Pin
+  HAL_GPIO_WritePin(GPIOA, LED_RED_VERTICAL_Pin|LED_GREEN_VERTICAL_Pin|LED_YELLOW_VERTICAL_Pin|LED_RED_HORIZONTAL_Pin
                           |LED_GREEN_HORIZONTAL_Pin|LED_YELLOW_HORIZONTAL_Pin|EN0_Pin|EN1_Pin
                           |EN2_Pin|EN3_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, SEG_A_STRAIGHT_Pin|SEG_B_STRAIGHT_Pin|SEG_C_STRAIGHT_Pin|SEG_B_HORIZONTAL_Pin
+  HAL_GPIO_WritePin(GPIOB, SEG_A_VERTICAL_Pin|SEG_B_VERTICAL_Pin|SEG_C_VERTICAL_Pin|SEG_B_HORIZONTAL_Pin
                           |SEG_C_HORIZONTAL_Pin|SEG_D_HORIZONTAL_Pin|SEG_E_HORIZONTAL_Pin|SEG_F_HORIZONTAL_Pin
-                          |SEG_G_HORIZONTAL_Pin|SEG_D_STRAIGHT_Pin|SEG_E_STRAIGHT_Pin|SEG_F_STRAIGHT_Pin
-                          |SEG_G_STRAIGHT_Pin|SEG_A_HORIZONTAL_Pin, GPIO_PIN_RESET);
+                          |SEG_G_HORIZONTAL_Pin|SEG_D_VERTICAL_Pin|SEG_E_VERTICAL_Pin|SEG_F_VERTICAL_Pin
+                          |SEG_G_VERTICAL_Pin|SEG_A_HORIZONTAL_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : LED_RED_STRAIGHT_Pin LED_GREEN_STRAIGHT_Pin LED_YELLOW_STRAIGHT_Pin LED_RED_HORIZONTAL_Pin
+  /*Configure GPIO pins : LED_RED_VERTICAL_Pin LED_GREEN_VERTICAL_Pin LED_YELLOW_VERTICAL_Pin LED_RED_HORIZONTAL_Pin
                            LED_GREEN_HORIZONTAL_Pin LED_YELLOW_HORIZONTAL_Pin EN0_Pin EN1_Pin
                            EN2_Pin EN3_Pin */
-  GPIO_InitStruct.Pin = LED_RED_STRAIGHT_Pin|LED_GREEN_STRAIGHT_Pin|LED_YELLOW_STRAIGHT_Pin|LED_RED_HORIZONTAL_Pin
+  GPIO_InitStruct.Pin = LED_RED_VERTICAL_Pin|LED_GREEN_VERTICAL_Pin|LED_YELLOW_VERTICAL_Pin|LED_RED_HORIZONTAL_Pin
                           |LED_GREEN_HORIZONTAL_Pin|LED_YELLOW_HORIZONTAL_Pin|EN0_Pin|EN1_Pin
                           |EN2_Pin|EN3_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -220,14 +218,14 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : SEG_A_STRAIGHT_Pin SEG_B_STRAIGHT_Pin SEG_C_STRAIGHT_Pin SEG_B_HORIZONTAL_Pin
+  /*Configure GPIO pins : SEG_A_VERTICAL_Pin SEG_B_VERTICAL_Pin SEG_C_VERTICAL_Pin SEG_B_HORIZONTAL_Pin
                            SEG_C_HORIZONTAL_Pin SEG_D_HORIZONTAL_Pin SEG_E_HORIZONTAL_Pin SEG_F_HORIZONTAL_Pin
-                           SEG_G_HORIZONTAL_Pin SEG_D_STRAIGHT_Pin SEG_E_STRAIGHT_Pin SEG_F_STRAIGHT_Pin
-                           SEG_G_STRAIGHT_Pin SEG_A_HORIZONTAL_Pin */
-  GPIO_InitStruct.Pin = SEG_A_STRAIGHT_Pin|SEG_B_STRAIGHT_Pin|SEG_C_STRAIGHT_Pin|SEG_B_HORIZONTAL_Pin
+                           SEG_G_HORIZONTAL_Pin SEG_D_VERTICAL_Pin SEG_E_VERTICAL_Pin SEG_F_VERTICAL_Pin
+                           SEG_G_VERTICAL_Pin SEG_A_HORIZONTAL_Pin */
+  GPIO_InitStruct.Pin = SEG_A_VERTICAL_Pin|SEG_B_VERTICAL_Pin|SEG_C_VERTICAL_Pin|SEG_B_HORIZONTAL_Pin
                           |SEG_C_HORIZONTAL_Pin|SEG_D_HORIZONTAL_Pin|SEG_E_HORIZONTAL_Pin|SEG_F_HORIZONTAL_Pin
-                          |SEG_G_HORIZONTAL_Pin|SEG_D_STRAIGHT_Pin|SEG_E_STRAIGHT_Pin|SEG_F_STRAIGHT_Pin
-                          |SEG_G_STRAIGHT_Pin|SEG_A_HORIZONTAL_Pin;
+                          |SEG_G_HORIZONTAL_Pin|SEG_D_VERTICAL_Pin|SEG_E_VERTICAL_Pin|SEG_F_VERTICAL_Pin
+                          |SEG_G_VERTICAL_Pin|SEG_A_HORIZONTAL_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;

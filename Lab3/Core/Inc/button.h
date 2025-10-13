@@ -15,4 +15,7 @@
 
 extern int button_flag[COUNT_BUTTON];
 
+void FlagKeyProcess(int index);
+void getKeyInput();
+
 #endif /* INC_BUTTON_H_ */

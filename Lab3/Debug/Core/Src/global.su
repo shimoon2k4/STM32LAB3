@@ -1,0 +1,6 @@
+global.c:25:6:clearAllState	4	static
+global.c:28:6:displayNumberVertical	16	static
+global.c:38:6:displayHorizontal	16	static
+global.c:49:6:updateClockBuffer	16	static
+global.c:56:6:update7SEG	16	static
+global.c:75:6:changeSignaLedSegment	16	static
