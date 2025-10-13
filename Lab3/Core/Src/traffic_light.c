@@ -58,40 +58,8 @@ void init_traffic_light(void) {
 	HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, SET);
 	HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, SET);
 }
-void traffic_light_run(int duration_flag_0, int duration_flag_1) {
-	if(timer_flag[0] == 1){
+void traffic_light_run(void) {
 		updateClockBuffer(AX_V.counter, AX_H.counter);
 		axis_tick(&AX_H, 1);
 		axis_tick(&AX_V, 0);
-		setTimer(0, duration_flag_0);
-	}
-	if(timer_flag[1] == 1){
-		switch(state_vertical){
-		case 0:
-			changeSignaLedSegment(0);
-			update7SEG(1);
-			break;
-		case 1:
-			changeSignaLedSegment(1);
-			update7SEG(2);
-			break;
-		default:
-			break;
-		}
-		switch(state_horizontal){
-			case 0:
-				changeSignaLedSegment(2);
-				update7SEG(3);
-				break;
-			case 1:
-				changeSignaLedSegment(3);
-				update7SEG(4);
-				break;
-			default:
-				break;
-		}
-		state_vertical = 1 - state_vertical;
-		state_horizontal = 1 - state_horizontal;
-		setTimer(1, duration_flag_1);
-	}
 }

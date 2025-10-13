@@ -100,7 +100,39 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	  traffic_light_run(1000, 500);
+	  if(timer_flag[0] == 1){
+	  traffic_light_run();
+	  setTimer(0, 1000);
+	  }
+	  if(timer_flag[1] == 1){
+		  switch(state_vertical){
+		  		case 0:
+		  			changeSignaLedSegment(0);
+		  			update7SEG(1);
+		  			break;
+		  		case 1:
+		  			changeSignaLedSegment(1);
+		  			update7SEG(2);
+		  			break;
+		  		default:
+		  			break;
+		  	}
+		  	switch(state_horizontal){
+		  		case 0:
+		  			changeSignaLedSegment(2);
+		  			update7SEG(3);
+		  			break;
+		  		case 1:
+		  			changeSignaLedSegment(3);
+		  			update7SEG(4);
+		  			break;
+		  		default:
+		  				break;
+		  	}
+		  	state_vertical = 1 - state_vertical;
+		  	state_horizontal = 1 - state_horizontal;
+		  setTimer(1,500);
+	  }
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
