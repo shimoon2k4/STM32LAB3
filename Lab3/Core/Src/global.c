@@ -7,6 +7,9 @@
 
 #include "global.h"
 
+const int MAX_LED = 4;
+int led_buffer[MAX_LED] = {0};
+
 void clearAllState(){
 
 }
@@ -31,6 +34,61 @@ void displayHorizontal(int number)
 	HAL_GPIO_WritePin(GPIOB, SEG_G_HORIZONTAL_Pin, (seg[number] & 0x40) ? SET : RESET);
 }
 
-void changeSignaLedSegment(){
-
+void updateClockBuffer(int num_straight, int num_horizontal){
+	led_buffer[0] = num_straight/10;
+	led_buffer[1] = num_straight%10;
+	led_buffer[2] = num_horizontal/10;
+	led_buffer[3] = num_horizontal%10;
 }
+
+void update7SEG(int index){
+	switch(index){
+	case 1:
+		displayNumberStraight(led_buffer[0]);
+		break;
+	case 2:
+		displayNumberStraight(led_buffer[1]);
+		break;
+	case 3:
+		displayHorizontal(led_buffer[2]);
+		break;
+	case 4:
+		displayHorizontal(led_buffer[3]);
+		break;
+	default:
+		break;
+	}
+}
+
+void changeSignaLedSegment(int signal){
+switch(signal){
+case 0:
+	HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, RESET);
+	HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, SET);
+	HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, SET);
+	HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, SET);
+	break;
+case 1:
+	HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, SET);
+	HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, RESET);
+	HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, SET);
+	HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, SET);
+	break;
+case 2:
+	HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, SET);
+	HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, SET);
+	HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, RESET);
+	HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, SET);
+	break;
+case 3:
+	HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, SET);
+	HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, SET);
+	HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, SET);
+	HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, RESET);
+	break;
+default:
+	return;
+	break;
+}
+}
+
