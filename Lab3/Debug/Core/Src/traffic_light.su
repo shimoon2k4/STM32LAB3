@@ -1,5 +1,5 @@
-traffic_light.c:20:6:tl_set_color	24	static
-traffic_light.c:26:6:apply_axis_lights	24	static
-traffic_light.c:43:6:axis_tick	16	static
-traffic_light.c:52:6:init_traffic_light	4	static
-traffic_light.c:55:6:traffic_light_run	8	static
+traffic_light.c:23:6:tl_set_color	24	static
+traffic_light.c:29:6:apply_axis_lights	24	static
+traffic_light.c:46:6:axis_tick	16	static
+traffic_light.c:55:6:init_traffic_light	8	static
+traffic_light.c:61:6:traffic_light_run	16	static

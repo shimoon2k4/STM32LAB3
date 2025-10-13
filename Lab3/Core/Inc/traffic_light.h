@@ -13,6 +13,9 @@
 #define GREEN  1
 #define YELLOW 2
 
+extern int state_vertical;
+extern int state_horizontal;
+
 typedef struct {
     GPIO_TypeDef* port[3];
     uint16_t pin[3];
@@ -32,7 +35,7 @@ extern Axis AX_V;
 extern const uint8_t DURATION[3];
 
 void init_traffic_light(void);
-void traffic_light_run(void);
+void traffic_light_run(int duration_flag_0, int duration_flag_1);
 
 void tl_set_color(const TLGroup* g, int color);
 void apply_axis_lights(int is_horizontal, int state);

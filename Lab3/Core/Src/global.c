@@ -25,27 +25,27 @@ char seg[10] =
 void clearAllState(){
 
 }
-void displayNumberVertical(int number)
+void displayNumber(int is_horizontal,int number)
 {
-	HAL_GPIO_WritePin(GPIOB, SEG_A_VERTICAL_Pin, (seg[number] & 0x01) ? SET : RESET);
-	HAL_GPIO_WritePin(GPIOB, SEG_B_VERTICAL_Pin, (seg[number] & 0x02) ? SET : RESET);
-	HAL_GPIO_WritePin(GPIOB, SEG_C_VERTICAL_Pin, (seg[number] & 0x04) ? SET : RESET);
-	HAL_GPIO_WritePin(GPIOB, SEG_D_VERTICAL_Pin, (seg[number] & 0x08) ? SET : RESET);
-	HAL_GPIO_WritePin(GPIOB, SEG_E_VERTICAL_Pin, (seg[number] & 0x10) ? SET : RESET);
-	HAL_GPIO_WritePin(GPIOB, SEG_F_VERTICAL_Pin, (seg[number] & 0x20) ? SET : RESET);
-	HAL_GPIO_WritePin(GPIOB, SEG_G_VERTICAL_Pin, (seg[number] & 0x40) ? SET : RESET);
+	if(is_horizontal){
+		HAL_GPIO_WritePin(GPIOB, SEG_A_HORIZONTAL_Pin, (seg[number] & 0x01) ? SET : RESET);
+		HAL_GPIO_WritePin(GPIOB, SEG_B_HORIZONTAL_Pin, (seg[number] & 0x02) ? SET : RESET);
+		HAL_GPIO_WritePin(GPIOB, SEG_C_HORIZONTAL_Pin, (seg[number] & 0x04) ? SET : RESET);
+		HAL_GPIO_WritePin(GPIOB, SEG_D_HORIZONTAL_Pin, (seg[number] & 0x08) ? SET : RESET);
+		HAL_GPIO_WritePin(GPIOB, SEG_E_HORIZONTAL_Pin, (seg[number] & 0x10) ? SET : RESET);
+		HAL_GPIO_WritePin(GPIOB, SEG_F_HORIZONTAL_Pin, (seg[number] & 0x20) ? SET : RESET);
+		HAL_GPIO_WritePin(GPIOB, SEG_G_HORIZONTAL_Pin, (seg[number] & 0x40) ? SET : RESET);
+	}
+	else{
+		HAL_GPIO_WritePin(GPIOB, SEG_A_VERTICAL_Pin, (seg[number] & 0x01) ? SET : RESET);
+		HAL_GPIO_WritePin(GPIOB, SEG_B_VERTICAL_Pin, (seg[number] & 0x02) ? SET : RESET);
+		HAL_GPIO_WritePin(GPIOB, SEG_C_VERTICAL_Pin, (seg[number] & 0x04) ? SET : RESET);
+		HAL_GPIO_WritePin(GPIOB, SEG_D_VERTICAL_Pin, (seg[number] & 0x08) ? SET : RESET);
+		HAL_GPIO_WritePin(GPIOB, SEG_E_VERTICAL_Pin, (seg[number] & 0x10) ? SET : RESET);
+		HAL_GPIO_WritePin(GPIOB, SEG_F_VERTICAL_Pin, (seg[number] & 0x20) ? SET : RESET);
+		HAL_GPIO_WritePin(GPIOB, SEG_G_VERTICAL_Pin, (seg[number] & 0x40) ? SET : RESET);
+	}
 }
-void displayHorizontal(int number)
-{
-	HAL_GPIO_WritePin(GPIOB, SEG_A_HORIZONTAL_Pin, (seg[number] & 0x01) ? SET : RESET);
-	HAL_GPIO_WritePin(GPIOB, SEG_B_HORIZONTAL_Pin, (seg[number] & 0x02) ? SET : RESET);
-	HAL_GPIO_WritePin(GPIOB, SEG_C_HORIZONTAL_Pin, (seg[number] & 0x04) ? SET : RESET);
-	HAL_GPIO_WritePin(GPIOB, SEG_D_HORIZONTAL_Pin, (seg[number] & 0x08) ? SET : RESET);
-	HAL_GPIO_WritePin(GPIOB, SEG_E_HORIZONTAL_Pin, (seg[number] & 0x10) ? SET : RESET);
-	HAL_GPIO_WritePin(GPIOB, SEG_F_HORIZONTAL_Pin, (seg[number] & 0x20) ? SET : RESET);
-	HAL_GPIO_WritePin(GPIOB, SEG_G_HORIZONTAL_Pin, (seg[number] & 0x40) ? SET : RESET);
-}
-
 void updateClockBuffer(int num_vertical, int num_horizontal){
 	led_buffer[0] = num_vertical/10;
 	led_buffer[1] = num_vertical%10;
@@ -56,16 +56,16 @@ void updateClockBuffer(int num_vertical, int num_horizontal){
 void update7SEG(int index){
 	switch(index){
 	case 1:
-		displayNumberVertical(led_buffer[0]);
+		displayNumber(0, led_buffer[0]);
 		break;
 	case 2:
-		displayNumberVertical(led_buffer[1]);
+		displayNumber(0, led_buffer[1]);
 		break;
 	case 3:
-		displayHorizontal(led_buffer[2]);
+		displayNumber(1, led_buffer[2]);
 		break;
 	case 4:
-		displayHorizontal(led_buffer[3]);
+		displayNumber(1, led_buffer[3]);
 		break;
 	default:
 		break;

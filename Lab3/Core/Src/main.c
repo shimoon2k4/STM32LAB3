@@ -94,10 +94,13 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  init_traffic_light();
+  setTimer(0, 1000);
+  setTimer(1,500);
   while (1)
   {
     /* USER CODE END WHILE */
-
+	  traffic_light_run(1000, 500);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

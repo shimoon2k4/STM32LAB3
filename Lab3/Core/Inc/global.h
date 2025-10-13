@@ -13,8 +13,7 @@
 
 #define MAX_LED 4
 void clearAllState();
-void displayNumberVertical(int number);
-void displayHorizontal(int number);
+void displayNumber(int is_horizontal,int number);
 void updateClockBuffer(int num_vertical, int num_horizontal);
 void update7SEG(int index);
 void changeSignaLedSegment(int signal);
