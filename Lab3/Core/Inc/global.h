@@ -16,6 +16,7 @@ void clearAllState();
 void displayNumber(int is_horizontal,int number);
 void updateClockBuffer(int num_vertical, int num_horizontal);
 void update7SEG(int index);
+void clearAllSignal();
 void changeSignaLedSegment(int signal);
 
 #endif /* INC_GLOBAL_H_ */

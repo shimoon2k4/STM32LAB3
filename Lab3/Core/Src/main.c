@@ -89,14 +89,15 @@ int main(void)
   MX_GPIO_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
-  HAL_TIM_Base_Start_IT(&htim2);
+  HAL_TIM_Base_Start_IT (& htim2 ) ;
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   init_traffic_light();
   setTimer(0, 1000);
-  setTimer(1,500);
+  setTimer(1,250);
+  int state=0;
   while (1)
   {
     /* USER CODE END WHILE */
@@ -105,33 +106,22 @@ int main(void)
 	  setTimer(0, 1000);
 	  }
 	  if(timer_flag[1] == 1){
-		  switch(state_vertical){
+		  switch(state){
 		  		case 0:
-		  			changeSignaLedSegment(0);
+		  			changeSignaLedSegment(state);
 		  			update7SEG(1);
-		  			break;
-		  		case 1:
-		  			changeSignaLedSegment(1);
-		  			update7SEG(2);
-		  			break;
-		  		default:
-		  			break;
-		  	}
-		  	switch(state_horizontal){
-		  		case 0:
-		  			changeSignaLedSegment(2);
 		  			update7SEG(3);
 		  			break;
 		  		case 1:
-		  			changeSignaLedSegment(3);
+		  			changeSignaLedSegment(state);
+		  			update7SEG(2);
 		  			update7SEG(4);
 		  			break;
 		  		default:
-		  				break;
+		  			break;
 		  	}
-		  	state_vertical = 1 - state_vertical;
-		  	state_horizontal = 1 - state_horizontal;
-		  setTimer(1,500);
+		  state = 1 - state;
+		  setTimer(1,250);
 	  }
     /* USER CODE BEGIN 3 */
   }
@@ -278,7 +268,7 @@ static void MX_GPIO_Init(void)
 void HAL_TIM_PeriodElapsedCallback ( TIM_HandleTypeDef * htim )
 {
 timerRun();
-getKeyInput();
+//getKeyInput();
 }
 /* USER CODE END 4 */
 

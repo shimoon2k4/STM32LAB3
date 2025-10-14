@@ -13,8 +13,8 @@
 #define GREEN  1
 #define YELLOW 2
 
-extern int state_vertical;
-extern int state_horizontal;
+//extern int state_vertical;
+//extern int state_horizontal;
 
 typedef struct {
     GPIO_TypeDef* port[3];
