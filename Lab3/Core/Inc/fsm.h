@@ -10,4 +10,6 @@
 
 #include "traffic_light.h"
 
+void fsm_for_input_processing(void);
+
 #endif /* INC_FSM_H_ */

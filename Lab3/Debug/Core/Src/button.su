@@ -1,2 +1,4 @@
-button.c:21:6:FlagKeyProcess	16	static
-button.c:24:6:getKeyInput	16	static
+button.c:42:6:button_reading	24	static
+button.c:72:9:is_button_pressed	16	static
+button.c:77:9:get_button_pressed_flag	16	static
+button.c:86:9:is_button_pressed_1s	16	static

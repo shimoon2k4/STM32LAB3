@@ -5,7 +5,7 @@
  *      Author: Lenovo
  */
 
-#include "global.h"
+#include <seven_segment.h>
 
 int led_buffer[MAX_LED] = {1, 2, 3, 4};
 
@@ -91,5 +91,35 @@ case 1:
 default:
 	break;
 }
+}
+void seg_scan_task(int timer_idx, int scan_period_ms){
+    extern int  timer_flag[];
+    extern void setTimer(int index, int duration);
+
+    // Chuẩn hoá chu kỳ về bội số của TIMER_CYCLE (10 ms) để khớp timerRun()
+    if (scan_period_ms < TIMER_CYCLE) scan_period_ms = TIMER_CYCLE;
+    int period_norm = ((scan_period_ms + TIMER_CYCLE - 1) / TIMER_CYCLE) * TIMER_CYCLE;
+
+    static uint8_t state = 0;  // 0: EN0&EN2 (digit 1 & 3), 1: EN1&EN3 (digit 2 & 4)
+
+    if (timer_flag[timer_idx] == 1){
+        switch (state){
+            case 0:
+                changeSignaLedSegment(0); // bật EN0 & EN2
+                update7SEG(1);            // vertical tens
+                update7SEG(3);            // horizontal tens
+                break;
+            case 1:
+                changeSignaLedSegment(1); // bật EN1 & EN3
+                update7SEG(2);            // vertical ones
+                update7SEG(4);            // horizontal ones
+                break;
+            default:
+                break;
+        }
+
+        state ^= 1;                 // đổi pha
+        setTimer(timer_idx, period_norm); // nạp lại timer cho lần quét kế tiếp
+    }
 }
 

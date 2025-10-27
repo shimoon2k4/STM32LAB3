@@ -12,13 +12,15 @@ const TLGroup VERTICAL = { {LED_RED_VERTICAL_GPIO_Port, LED_GREEN_VERTICAL_GPIO_
 const TLGroup HORIZONTAL = { {LED_RED_HORIZONTAL_GPIO_Port, LED_GREEN_HORIZONTAL_GPIO_Port, LED_YELLOW_HORIZONTAL_GPIO_Port},
                           {LED_RED_HORIZONTAL_Pin, LED_GREEN_HORIZONTAL_Pin, LED_YELLOW_HORIZONTAL_Pin} };
 
-const uint8_t DURATION[3] = {5, 3, 2};
+uint8_t DURATION[3] = {5, 3, 2};
 
 //int state_vertical = 0;
 //int state_horizontal = 0;
 
 Axis AX_H = { .state = RED,   .counter = 5 };
 Axis AX_V = { .state = GREEN, .counter = 3 };
+
+int state = 0;
 
 void tl_set_color(const TLGroup* g, int color) {
     for (int c = 0; c < 3; ++c) {
@@ -58,8 +60,19 @@ void init_traffic_light(void) {
 //	HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, SET);
 //	HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, SET);
 }
+void increase_led_time(int color) {
+    if (DURATION[color] < MAX_TIME_DURATION) {
+    	DURATION[color]++;
+    }
+}
 void traffic_light_run(void) {
 	updateClockBuffer(AX_V.counter, AX_H.counter);
 		axis_tick(&AX_H, 1);
 		axis_tick(&AX_V, 0);
+}
+void test_process_run(){
+	if(timer_flag[0] == 1){
+		traffic_light_run();
+	    setTimer(0, 1000);
+	}
 }

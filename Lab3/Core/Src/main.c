@@ -20,6 +20,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "fsm.h"
+#include "button.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -97,32 +98,15 @@ int main(void)
   init_traffic_light();
   setTimer(0, 1000);
   setTimer(1,250);
-  int state=0;
+//  int state=0;
   while (1)
   {
     /* USER CODE END WHILE */
-	  if(timer_flag[0] == 1){
-	  traffic_light_run();
-	  setTimer(0, 1000);
-	  }
-	  if(timer_flag[1] == 1){
-		  switch(state){
-		  		case 0:
-		  			changeSignaLedSegment(state);
-		  			update7SEG(1);
-		  			update7SEG(3);
-		  			break;
-		  		case 1:
-		  			changeSignaLedSegment(state);
-		  			update7SEG(2);
-		  			update7SEG(4);
-		  			break;
-		  		default:
-		  			break;
-		  	}
-		  state = 1 - state;
-		  setTimer(1,250);
-	  }
+	  test_process_run();
+	 seg_scan_task(1, 250);
+//if(get_button_pressed_flag(0)){
+//	HAL_GPIO_TogglePin(LED_RED_VERTICAL_GPIO_Port, LED_RED_VERTICAL_Pin);
+//}
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -259,7 +243,7 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pins : BUTTON1_Pin BUTTON2_Pin BUTTON3_Pin */
   GPIO_InitStruct.Pin = BUTTON1_Pin|BUTTON2_Pin|BUTTON3_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
 }
@@ -268,6 +252,7 @@ static void MX_GPIO_Init(void)
 void HAL_TIM_PeriodElapsedCallback ( TIM_HandleTypeDef * htim )
 {
 timerRun();
+button_reading();
 //getKeyInput();
 }
 /* USER CODE END 4 */

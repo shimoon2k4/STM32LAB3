@@ -1,5 +1,7 @@
-traffic_light.c:23:6:tl_set_color	24	static
-traffic_light.c:29:6:apply_axis_lights	24	static
-traffic_light.c:46:6:axis_tick	16	static
-traffic_light.c:55:6:init_traffic_light	4	static
-traffic_light.c:61:6:traffic_light_run	8	static
+traffic_light.c:25:6:tl_set_color	24	static
+traffic_light.c:31:6:apply_axis_lights	24	static
+traffic_light.c:48:6:axis_tick	16	static
+traffic_light.c:57:6:init_traffic_light	4	static
+traffic_light.c:63:6:increase_led_time	16	static
+traffic_light.c:68:6:traffic_light_run	8	static
+traffic_light.c:73:6:test_process_run	8	static
