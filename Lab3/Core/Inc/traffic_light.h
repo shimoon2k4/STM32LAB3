@@ -16,6 +16,8 @@
 //extern int state_vertical;
 //extern int state_horizontal;
 
+extern uint8_t DURATION[3];
+
 typedef struct {
     GPIO_TypeDef* port[3];
     uint16_t pin[3];

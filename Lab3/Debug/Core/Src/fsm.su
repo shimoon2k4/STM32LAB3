@@ -1,1 +1,4 @@
-fsm.c:14:6:fsm_for_input_processing	8	static
+fsm.c:22:13:cycle_mode	4	static
+fsm.c:27:13:inc_wrap	16	static
+fsm.c:33:13:render_mode2to4	16	static
+fsm.c:46:6:fsm_for_input_processing	8	static

@@ -92,6 +92,13 @@ default:
 	break;
 }
 }
+void seg_show_mode_value(int mode, int value){
+	if(mode == 1){
+		return;
+	}
+	updateClockBuffer(mode, value);
+
+}
 void seg_scan_task(int timer_idx, int scan_period_ms){
     extern int  timer_flag[];
     extern void setTimer(int index, int duration);
