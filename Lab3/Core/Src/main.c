@@ -102,8 +102,9 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	  test_process_run();
-	 seg_scan_task(1, 250);
+//	  test_process_run();
+//	 seg_scan_task(1, 250);
+	  fsm_for_input_processing();
 //if(get_button_pressed_flag(0)){
 //	HAL_GPIO_TogglePin(LED_RED_VERTICAL_GPIO_Port, LED_RED_VERTICAL_Pin);
 //}

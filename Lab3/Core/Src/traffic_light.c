@@ -60,9 +60,9 @@ void init_traffic_light(void) {
 	HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, SET);
 	HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, SET);
 }
-void increase_led_time(int color) {
+void update_led_time(int color, int value) {
     if (DURATION[color] < MAX_TIME_DURATION) {
-    	DURATION[color]++;
+    	DURATION[color] = value;
     }
 }
 void traffic_light_run(void) {

@@ -43,4 +43,5 @@ void test_process_run();
 void tl_set_color(const TLGroup* g, int color);
 void apply_axis_lights(int is_horizontal, int state);
 void axis_tick(Axis* ax, int is_horizontal);
+void update_led_time(int color, int value);
 #endif /* INC_TRAFFIC_LIGHT_H_ */
