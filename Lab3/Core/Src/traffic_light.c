@@ -65,14 +65,14 @@ void update_led_time(int color, int value) {
     	DURATION[color] = value;
     }
 }
-void traffic_light_run(void) {
-	updateClockBuffer(AX_V.counter, AX_H.counter);
-		axis_tick(&AX_H, 1);
-		axis_tick(&AX_V, 0);
-}
+//void traffic_light_run(void) {
+//
+//}
 void test_process_run(){
 	if(timer_flag[0] == 1){
-		traffic_light_run();
+		updateClockBuffer(AX_V.counter, AX_H.counter);
+		axis_tick(&AX_H, 1);
+		axis_tick(&AX_V, 0);
 	    setTimer(0, 1000);
 	}
 }

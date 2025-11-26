@@ -12,10 +12,10 @@
 
 // Số nút
 #define N0_OF_BUTTONS 3
-// Chỉ số nút để đọc cho dễ nhớ
-#define BTN1_IDX 0   // chọn/cycle mode
-#define BTN2_IDX 1   // tăng giá trị
-#define BTN3_IDX 2   // set/lưu
+
+//#define BTN1_IDX 0
+//#define BTN2_IDX 1
+//#define BTN3_IDX 2
 
 // Gọi mỗi 10 ms (trong callback TIM2)
 void button_reading(void);

@@ -37,7 +37,7 @@ extern Axis AX_V;
 extern uint8_t DURATION[3];
 
 void init_traffic_light(void);
-void traffic_light_run(void);
+//void traffic_light_run(void);
 void test_process_run();
 
 void tl_set_color(const TLGroup* g, int color);

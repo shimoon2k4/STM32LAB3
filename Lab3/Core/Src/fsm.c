@@ -20,8 +20,18 @@ static Mode_t mode = MODE_NORMAL;
 //static uint8_t blinkOn;
 
 // Hàm chuyển đổi chế độ (Mode)
+void clear_all_leds(void) {
+    HAL_GPIO_WritePin(LED_RED_VERTICAL_GPIO_Port, LED_RED_VERTICAL_Pin, SET);
+    HAL_GPIO_WritePin(LED_GREEN_VERTICAL_GPIO_Port, LED_GREEN_VERTICAL_Pin, SET);
+    HAL_GPIO_WritePin(LED_YELLOW_VERTICAL_GPIO_Port, LED_YELLOW_VERTICAL_Pin, SET);
+    HAL_GPIO_WritePin(LED_RED_HORIZONTAL_GPIO_Port, LED_RED_HORIZONTAL_Pin, SET);
+    HAL_GPIO_WritePin(LED_GREEN_HORIZONTAL_GPIO_Port, LED_GREEN_HORIZONTAL_Pin, SET);
+    HAL_GPIO_WritePin(LED_YELLOW_HORIZONTAL_GPIO_Port, LED_YELLOW_HORIZONTAL_Pin, SET);
+}
 static void cycle_mode(void) {
     mode = (mode == MODE_MOD_GRN) ? MODE_NORMAL : (Mode_t)(mode + 1);
+    clear_all_leds();
+    setTimer(2, 500);
 }
 
 // Hàm tăng giá trị (quay lại 1 nếu quá 99)
@@ -50,27 +60,42 @@ void fsm_for_input_processing(void) {
         cycle_mode();
 //        if (mode == MODE_NORMAL) init_traffic_light();
     }
-    switch(mode){
-    case MODE_NORMAL:
+    if(mode == MODE_NORMAL){
     	test_process_run();
     	tem_redDur = redDur;
     	tem_ambDur = ambDur;
     	tem_grnDur = grnDur;
-
-    	break;
-//    case MODE_MOD_RED:
-//    	updateClockBuffer(1, redDur);
-//    	break;
-//    case MODE_MOD_AMB
-    default:
-    	break;
     }
 //    if (mode == MODE_NORMAL) {
 //        // Hiển thị thời gian còn lại cho cả 2 hướng (A và B) trên LED 7 đoạn
 ////    	traffic_light_run();
 //        return;
 //    }
+    else {
+            // Các Mode điều chỉnh (2, 3, 4): Xử lý nhấp nháy LED
+            // Sử dụng Timer 1 (được định nghĩa trong main) cho việc nhấp nháy
+            if (timer_flag[2] == 1) {
+                // Reset timer: 25 ticks * 10ms = 250ms (Tần số 2Hz -> Đảo mỗi 250ms)
+                setTimer(2, 500);
 
+                switch (mode) {
+                    case MODE_MOD_RED:
+                        HAL_GPIO_TogglePin(LED_RED_VERTICAL_GPIO_Port, LED_RED_VERTICAL_Pin);
+                        HAL_GPIO_TogglePin(LED_RED_HORIZONTAL_GPIO_Port, LED_RED_HORIZONTAL_Pin);
+                        break;
+                    case MODE_MOD_AMB:
+                    	HAL_GPIO_TogglePin(LED_YELLOW_VERTICAL_GPIO_Port, LED_YELLOW_VERTICAL_Pin);
+                    	HAL_GPIO_TogglePin(LED_YELLOW_HORIZONTAL_GPIO_Port, LED_YELLOW_HORIZONTAL_Pin);
+                        break;
+                    case MODE_MOD_GRN:
+                    	HAL_GPIO_TogglePin(LED_GREEN_VERTICAL_GPIO_Port, LED_GREEN_VERTICAL_Pin);
+                    	HAL_GPIO_TogglePin(LED_GREEN_HORIZONTAL_GPIO_Port, LED_GREEN_HORIZONTAL_Pin);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
     // Chế độ 2–4: chỉnh thời gian cho LED đỏ, vàng, xanh
     if (get_button_pressed_flag(BTN2_IDX)) {
         if (mode == MODE_MOD_RED) inc_wrap(&tem_redDur);

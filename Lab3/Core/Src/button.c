@@ -14,10 +14,9 @@
 #define BTN3_Pin       GPIO_PIN_13
 #endif
 
-#define BUTTON_IS_PRESSED   GPIO_PIN_RESET   // kéo lên, active-low
+#define BUTTON_IS_PRESSED   GPIO_PIN_RESET
 #define BUTTON_IS_RELEASED  GPIO_PIN_SET
 
-// Tự động tăng sau khi giữ 1s (10ms * 100)
 #define DURATION_FOR_AUTO_INCREASING 100
 
 static GPIO_TypeDef* BTN_PORT[N0_OF_BUTTONS] = {
